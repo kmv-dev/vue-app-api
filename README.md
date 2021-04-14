@@ -1,4 +1,4 @@
-# vue3-cli-app babel,scss(mixin),router,vuex
+# crypton.studio test app
 
 ## Project setup
 ```
@@ -13,9 +13,4 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
