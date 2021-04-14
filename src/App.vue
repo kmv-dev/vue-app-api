@@ -1,8 +1,11 @@
 <template>
     <header class="header">
+        <div class="header__logo logo">
+            <img src="@/assets/img/logo.png" alt="logo">
+        </div>
         <nav class="header__nav">
-            <router-link to="/">Все герои</router-link>
-            <router-link to="/favorites">Любимые герои</router-link>
+            <router-link class="header__link" to="/">All</router-link>
+            <router-link class="header__link" to="/favorites">Favorites</router-link>
         </nav>
     </header>
     <router-view/>

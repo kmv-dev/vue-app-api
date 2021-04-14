@@ -15,3 +15,10 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+    .main {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>

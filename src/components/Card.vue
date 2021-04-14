@@ -1,5 +1,14 @@
 <template>
-    <h1>main-page</h1>
+    <div class="card">
+        <h2 class="card__title">rick and morty</h2>
+        <div class="card__img">
+            <img src="@/assets/img/test.jpg" alt="">
+        </div>
+        <div class="card__action">
+            <div class="card__btn card__btn--favorites"></div>
+            <div class="card__btn card__btn--delete"></div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -7,5 +16,43 @@
 </script>
 
 <style scoped lang="scss">
-
+    .card {
+        position: relative;
+        width: 230px;
+        padding: 5px 15px 0;
+        margin: 10px;
+        border: 1px solid #f2f2f2;
+        &__title {
+            font-size: 16px;
+        }
+        &__img {
+            img {
+                width: 100%;
+            }
+        }
+        &__action {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            height: 50px;
+        }
+        &__btn {
+            width: 35px;
+            height: 35px;
+            margin: 5px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: 0.2s ease-in-out;
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.1);
+            }
+            &--favorites {
+                background-image: url("../assets/icon/favorites.svg");
+            }
+            &--delete {
+                background-image: url("../assets/icon/delete.svg");
+            }
+        }
+    }
 </style>
