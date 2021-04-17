@@ -2,11 +2,14 @@
     <div class="card">
         <h2 class="card__title">{{ character.name }}</h2>
         <div class="card__img">
-            <img src="@/assets/img/test.jpg" alt="">
+            <img :src="character.image" alt="image">
         </div>
         <div class="card__action">
-            <div class="card__btn card__btn--favorites"></div>
-            <div class="card__btn card__btn--delete"></div>
+            <span>{{ character.gender }}</span>
+            <div>
+                <div class="card__btn card__btn--favorites"></div>
+                <div class="card__btn card__btn--delete"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -20,9 +23,6 @@ export default {
             type: Object,
             required: true
         }
-    },
-    created() {
-        this.$store.dispatch('fetchCharacters');
     },
 }
 
@@ -46,8 +46,12 @@ export default {
         &__action {
             width: 100%;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             height: 50px;
+            div {
+                display: flex;
+            }
         }
         &__btn {
             width: 35px;

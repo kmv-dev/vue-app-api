@@ -1,13 +1,17 @@
 <template>
     <div class="main">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            v-model:currentPage="currentPage"
+            :total="count"
+            :page-size="20"
+            @current-change="updatePage"
+            >
+        </el-pagination>
         <div class="main__inner">
             <Card v-for="character in characters" :key="character.id" :character="character"/>
         </div>
-        <el-pagination
-            small
-            layout="prev, pager, next"
-            :total="50">
-        </el-pagination>
     </div>
 </template>
 
@@ -20,19 +24,35 @@ export default {
     components: {
         Card,
     },
+    data() {
+        return {
+            currentPage: 1,
+        }
+    },
     computed: {
-        ...mapState(['characters'])
+        ...mapState(['characters','count'])
+    },
+    methods: {
+        updatePage(currentPage) {
+            this.currentPage = currentPage
+            this.fetchCharacters()
+        },
+        fetchCharacters() {
+            this.$store.dispatch('fetchCharacters', this.currentPage)
+        }
     },
     created() {
-        this.$store.dispatch('fetchCharacters')
-    }
+        this.fetchCharacters()
+    },
 }
 </script>
 
 <style scoped lang="scss">
     .main {
+        padding: 0 100px;
         display: flex;
         flex-direction: column;
+        align-items: flex-end;
         &__inner {
             display: flex;
             flex-wrap: wrap;
