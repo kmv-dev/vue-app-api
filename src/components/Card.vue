@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-        <h2 class="card__title">rick and morty</h2>
+        <h2 class="card__title">{{ character.name }}</h2>
         <div class="card__img">
             <img src="@/assets/img/test.jpg" alt="">
         </div>
@@ -12,6 +12,19 @@
 </template>
 
 <script>
+
+export default {
+    name: 'Card',
+    props: {
+        character: {
+            type: Object,
+            required: true
+        }
+    },
+    created() {
+        this.$store.dispatch('fetchCharacters');
+    },
+}
 
 </script>
 

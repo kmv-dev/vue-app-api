@@ -1,17 +1,30 @@
 <template>
     <div class="main">
-        <Card/>
+        <div class="main__inner">
+            <Card v-for="character in characters" :key="character.id" :character="character"/>
+        </div>
+        <el-pagination
+            small
+            layout="prev, pager, next"
+            :total="50">
+        </el-pagination>
     </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import Card from '@/components/Card.vue'
+import {mapState} from "vuex";
 
 export default {
     name: 'Main',
     components: {
-        Card
+        Card,
+    },
+    computed: {
+        ...mapState(['characters'])
+    },
+    created() {
+        this.$store.dispatch('fetchCharacters')
     }
 }
 </script>
@@ -19,6 +32,10 @@ export default {
 <style scoped lang="scss">
     .main {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
+        &__inner {
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 </style>
