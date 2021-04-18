@@ -7,8 +7,8 @@
         <div class="card__action">
             <span>{{ character.gender }}</span>
             <div>
-                <div class="card__btn card__btn--favorites"></div>
-                <div class="card__btn card__btn--delete"></div>
+                <div v-if="allowSave" class="card__btn card__btn--favorites" @click ="saveItem"></div>
+                <div v-if="allowDelete" class="card__btn card__btn--delete" @click="deleteItem"></div>
             </div>
         </div>
     </div>
@@ -18,12 +18,34 @@
 
 export default {
     name: 'Card',
+    data() {
+        return {
+            allowDelete: false,
+            allowSave: true
+        }
+    },
     props: {
         character: {
             type: Object,
             required: true
-        }
+        },
     },
+    methods: {
+        saveItem() {
+            let items = JSON.parse(localStorage.getItem('favorites')) || [];
+            items.push(this.character)
+            localStorage.setItem('favorites', JSON.stringify(items))
+            this.allowSave = false
+            this.allowDelete = true
+        },
+        deleteItem() {
+            let items = JSON.parse(localStorage.getItem('favorites'))
+            items = items.filter(character => character.name !== this.character.name)
+            localStorage.setItem('favorites', JSON.stringify(items))
+            this.allowDelete = false
+            this.allowSave = true
+        },
+    }
 }
 
 </script>
@@ -54,21 +76,22 @@ export default {
             }
         }
         &__btn {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
             margin: 5px;
             background-repeat: no-repeat;
             background-size: cover;
-            transition: 0.2s ease-in-out;
             cursor: pointer;
+            transition: 0.3s ease-in-out;
             &:hover {
                 transform: scale(1.1);
             }
             &--favorites {
-                background-image: url("../assets/icon/favorites.svg");
+                background-image: url("../assets/icon/1.svg");
+                opacity: 0.2;
             }
             &--delete {
-                background-image: url("../assets/icon/delete.svg");
+                background-image: url("../assets/icon/2.png");
             }
         }
     }

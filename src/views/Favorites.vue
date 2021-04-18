@@ -1,5 +1,44 @@
 <template>
   <div class="favorites">
-    <h1>This is an favorites page</h1>
+    <div class="favorites__inner">
+        <Card v-for="character in favorites" :key="character.id" :character="character"/>
+    </div>
   </div>
 </template>
+
+<script>
+import Card from "../components/Card";
+
+export default {
+    name: 'Favorites',
+    components: {
+        Card
+    },
+    data() {
+        return {
+            favorites: [],
+        }
+    },
+    methods: {
+        fetchFavorites() {
+            this.favorites = JSON.parse(localStorage.getItem('favorites'))
+        }
+    },
+    mounted() {
+        this.fetchFavorites()
+    }
+}
+</script>
+
+<style scoped lang="scss">
+    .favorites {
+        padding: 0 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        &__inner {
+            display: flex;
+            flex-wrap: wrap;
+    }
+}
+</style>
