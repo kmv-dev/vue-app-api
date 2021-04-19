@@ -1,7 +1,7 @@
 import {createStore} from 'vuex'
 import axios from "axios";
 
-const baseURL = 'https://rickandmortyapi.com/api/character';
+const baseURL = 'https://rickandmortyapi.com/api/character/';
 
 export default createStore({
     state: {
@@ -28,7 +28,23 @@ export default createStore({
                     state.commit('SET_COUNT', data.info.count)
                 })
                 .catch(error => console.log(error));
-        }
+        },
+        searchCharacters(state, value) {
+            return axios.get(`${baseURL}?name=${value}`)
+                .then(({data}) => {
+                    state.commit('SET_CHARACTERS', data.results)
+                    state.commit('SET_COUNT', data.info.count)
+                })
+                .catch(error => console.log(error));
+        },
+        filterCharacters(state, value) {
+            return axios.get(`${baseURL}?gender=${value}`)
+                .then(({data}) => {
+                    state.commit('SET_CHARACTERS', data.results)
+                    state.commit('SET_COUNT', data.info.count)
+                })
+                .catch(error => console.log(error));
+        },
     },
     getters: {
         getCharacters: state => state.characters,

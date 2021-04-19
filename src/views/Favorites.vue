@@ -1,7 +1,7 @@
 <template>
   <div class="favorites">
     <div class="favorites__inner">
-        <Card v-for="character in favorites" :key="character.id" :character="character"/>
+        <Card v-for="character in favorites" :key="character.id" :character="character" @click="fetchFavorites"/>
     </div>
   </div>
 </template>
