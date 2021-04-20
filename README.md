@@ -1,4 +1,4 @@
-# crypton.studio test app
+# test app
 
 ## Project setup
 ```
